@@ -80,6 +80,8 @@ const rotate = () => {
       console.error('Error:', error);
     });
 
+    // const button_zindex =  document.getElementsByName("rullet-button");
+    // button_zindex.style.zIndex = 1;
     // setTimeout(() => alert(`오늘 ${product[ran]} 어떠신가요?`), 2000);
   }, 1);
 };
@@ -88,7 +90,7 @@ newMake();
 
 var map = new naver.maps.Map("map", {
   center: new naver.maps.LatLng(36.628583, 127.457583),
-  zoom: 16,
+  zoom: 15,
   mapTypeControl: true
 });
 
@@ -102,6 +104,14 @@ function searchAddressToCoordinate(address) {
   naver.maps.Service.geocode({
       query: address
   }, function(status, response) {
+
+      try {
+        marker.setMap(null);
+      } catch (e) {
+
+      }
+
+
       if (status === naver.maps.Service.Status.ERROR) {
           return alert('Something Wrong!');
       }
