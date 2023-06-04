@@ -107,6 +107,7 @@ function searchAddressToCoordinate(address) {
 
       try {
         marker.setMap(null);
+        infowindow.close();
       } catch (e) {
 
       }
