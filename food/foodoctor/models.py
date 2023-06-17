@@ -1,6 +1,7 @@
 # from django.db import models
 from djongo import models
 
+
 # Create your models here.
 
 
@@ -36,6 +37,16 @@ class Keyword(models.Model):
         abstract = True
 
 
+class Review(models.Model):
+    content = models.TextField()
+    author_name = models.CharField(max_length=15)
+    rating = models.IntegerField()
+    last_updated = models.DateField(auto_now=True)
+
+    class Meta:
+        abstract = True
+
+
 class Restaurant(models.Model):
     _id = models.ObjectIdField()
     name = models.TextField()
@@ -45,8 +56,6 @@ class Restaurant(models.Model):
         model_container=BusinessHours,
         null=True,
     )
-    mapx = models.IntegerField()
-    mapy = models.IntegerField()
     category = models.TextField()
     menu = models.ArrayField(
         model_container=Menu,
@@ -55,8 +64,20 @@ class Restaurant(models.Model):
         model_container=Keyword,
         null=True
     )
+    review = models.ArrayField(
+        model_container=Review,
+        null=True
+    )
     rating = models.DecimalField(max_digits=3, decimal_places=2)
+    naverplaceURL = models.TextField()
     last_updated = models.DateField(auto_now=True)
 
     def __str__(self):
         return self.name
+
+
+class LatestReviews(models.Model):
+    review = models.ArrayField(
+        model_container=Review,
+        null=True
+    )

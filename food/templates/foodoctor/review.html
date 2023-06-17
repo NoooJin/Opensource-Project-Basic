@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+    <head>
+        <!-- Webpage Title -->
+        <title>리뷰 작성</title>
+
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+              integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+              crossorigin="anonymous">
+
+        <!-- JS -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+                integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+                crossorigin="anonymous"></script>
+
+        <!-- 구글폰트 -->
+        <link href="https://fonts.googleapis.com/css?family=Do+Hyeon&display=swap" rel="stylesheet">
+
+        <style type="text/css">
+            * {
+                font-family: "Do Hyeon", sans-serif;
+            }
+
+            h1,
+            h5 {
+                display: inline;
+            }
+
+            .container {
+                margin-top: 5%;
+            }
+            .info {
+                margin-top: 20px;
+                margin-bottom: 20px;
+            }
+
+            .review {
+                text-align: center;
+            }
+
+            .reviews {
+                margin-top: 100px;
+            }
+            .input-group-text {
+                background-color: #841640;
+                color: #ffff;
+                
+            }
+            .btn btn-primary {
+                background-color: #841640;
+                color: #ffff;
+            }
+        </style>
+    </head>
+
+    <body style="background: #eee;">
+        <div class="container">
+            <div class="info">
+                <form method="post">
+                    {% csrf_token %}
+                    <div style="text-align: center;">
+                        <h1>리뷰를 작성해봐요!</h1>
+                        <p>어떤 부분이 좋고 싫었는지 말씀해주세요!</p>
+                        <img src= "https://fund.chungbuk.ac.kr/resource/DATA/editor/202009/1600851730869CS4QU2.gif" width="200px" height="200px"></img>
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">닉네임</span>
+                        </div>
+                        <input type="text" class="form-control" id="author_name">
+                    </div>
+                    <div class="input-group mb-3">
+                        <label class="input-group-text" for="rating">별점</label>
+                        <select class="form-select" id="rating">
+                          <option selected>-- 별점을 선택해주세요 --</option>
+                          <option value="1">⭐</option>
+                          <option value="2">⭐⭐</option>
+                          <option value="3">⭐⭐⭐</option>
+                          <option value="4">⭐⭐⭐⭐</option>
+                          <option value="5">⭐⭐⭐⭐⭐</option>
+                        </select>
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">리뷰</span>
+                        </div>
+                        <textarea class="form-control" id="content"
+                                  cols="30"
+                                  rows="5" placeholder="160자까지 입력할 수 있습니다."></textarea>
+                    </div>
+                    <div class="review">
+                        <button onclick="location.href='{% url 'foodoctor:index' %}'" type="submit" class="btn btn-primary"  style="background-color: #841640; color: #ffff;">리뷰 작성완료</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
+
+</html>

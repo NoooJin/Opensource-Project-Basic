@@ -101,40 +101,15 @@ def insert_restaurant_data(request):
     return render(request, 'foodoctor/index.html')
 
 
-def refactor_road_address_all(request):
-    import re
-    rest_list = Restaurant.objects.all()
-    road_address_discriminant = re.compile(r"[가-힣]+길 |[가-힣]+로 ")
-    si_re = re.compile(r"[가-힣]+시 ")
-    gu_re = re.compile(r"[0-9가-힣]+구 ")
-    road_re = re.compile(r"[0-9가-힣]+로([0-9]+번가*길)* [0-9]+(-[0-9]+)*")
-    count = 0
-    for each in rest_list:
-        address = each.address
-        if road_address_discriminant.search(address) is None:
-            print(f'{address} 는 지번 주소입니다')
-            continue
-        else:
-            # print(f'{address} 는 도로명 주소입니다')
-            count += 1
+def add_naverplace_url(request):
+    path = 'C:/Users/clc26/Downloads/input/input1.txt'
+    with open(path, 'r', encoding='UTF8') as f:
+        length = int(f.readline())
+        for i in range(length):
+            restaurant_name = f.readline().rstrip()
+            restaurant = Restaurant.objects.get(name=restaurant_name)
+            restaurant.naverplaceURL = f.readline().rstrip()
+            restaurant.rating = restaurant.rating.to_decimal()
+            restaurant.save()
 
-        road_address = '충북 '
-        match = si_re.search(address)
-        if match is not None:
-            road_address = road_address + match.group(0)
-        match = gu_re.search(address)
-        if match is not None:
-            road_address = road_address + match.group(0)
-        match = road_re.search(address)
-        if match is not None:
-            road_address = road_address + match.group(0)
-        else:
-            print("no road")
-
-        # print(road_address)
-        # save() 에서 에러 나서 도큐먼트 수정할때 쓸 save 폼을 만들어야함
-        each.road_address = road_address
-        each.save()
-
-    print(count)
     return render(request, 'foodoctor/index.html')
