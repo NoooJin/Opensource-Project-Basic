@@ -74,7 +74,8 @@ const rotate = () => {
     .then(response => response.json())
     .then(data => {
         // 얻은 도로명 주소로 Maps API 에 요청
-        searchAddressToCoordinate(data['address'])
+        console.log(data)
+        searchAddressToCoordinate(data['address'], data['name'], data['url'])
     })
     .catch(error => {
       console.error('Error:', error);
@@ -100,7 +101,7 @@ var infoWindow = new naver.maps.InfoWindow({
 
 map.setCursor('pointer');
 
-function searchAddressToCoordinate(address) {
+function searchAddressToCoordinate(address, restaurant_name, naverplaceURL) {
   naver.maps.Service.geocode({
       query: address
   }, function(status, response) {
@@ -144,8 +145,8 @@ function searchAddressToCoordinate(address) {
 
       contentString = [
         '<div class="">',
-        '   <h5>'+ address +'</h5>',
-        '   <a href="https://map.naver.com/v5/search/%EC%B6%A9%EB%B6%81%EB%8C%80%ED%95%99%EA%B5%90%20%EA%B7%BC%EC%B2%98%20%EB%A7%9B%EC%A7%91/place/1784557064?placePath=%3Fentry=pll%26from=nx%26fromNxList=true&c=15,0,0,0,dh">'+ '클릭해주세요' +'</a>',
+        '   <h5>'+ restaurant_name +'</h5>',
+        '   <a href="'+ naverplaceURL + '"> 클릭해주세요' +'</a>',
         '</div>'
     ].join('');
 
