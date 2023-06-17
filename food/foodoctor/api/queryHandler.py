@@ -45,13 +45,13 @@ def roulette_query(request):
         road_address = '충북 '
         match = si_re.search(address)
         if match is not None:
-            road_address = road_address + match.group(1)
+            road_address = road_address + match.group(0)
         match = gu_re.search(address)
         if match is not None:
-            road_address = road_address + match.group(1)
+            road_address = road_address + match.group(0)
         match = road_re.search(address)
         if match is not None:
-            road_address = road_address + match.group(1)
+            road_address = road_address + match.group(0)
 
         urlstring = rest.naverplaceURL
         response = {'address': road_address,
