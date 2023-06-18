@@ -44,6 +44,8 @@ def add_review(request, restaurant_name: str):
             review_data = form.cleaned_data
             restaurant = Restaurant.objects.get(name=restaurant_name)
             review = {
+                'restaurant_name': restaurant_name,
+                'stand_img': restaurant.menu[0]['img_src'],
                 'content': review_data['content'],
                 'author_name': review_data['author_name'],
                 'rating': review_data['rating'],
@@ -61,11 +63,14 @@ def add_review(request, restaurant_name: str):
                 restaurant.save()
 
             if len(LatestReviews.objects.all()) > 0:
+                print('리뷰가 추가되었습니다')
                 latest_reviews = (LatestReviews.objects.all())[0]
-                if len(latest_reviews.review) >= 5:
+                if len(latest_reviews.review) >= 8:
                     latest_reviews.review.pop(0)
                 latest_reviews.review.append(review)
+                latest_reviews.save()
             else:
+                print('리뷰가 없었던 식당에 메뉴가 생성되었습니다')
                 latest_reviews = LatestReviews()
                 arr = list()
                 arr.append(review)
@@ -94,5 +99,6 @@ def add_review(request, restaurant_name: str):
 
 def show_review_list(request, restaurant_name: str):
     review_list = (Restaurant.objects.get(name=restaurant_name)).review
-    context = {'review_list': review_list}
+    context = {'review_list': review_list,
+               'restaurant_name': restaurant_name}
     return render(request, 'foodoctor/list.html', context)

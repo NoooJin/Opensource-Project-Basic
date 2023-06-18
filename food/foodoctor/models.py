@@ -38,6 +38,8 @@ class Keyword(models.Model):
 
 
 class Review(models.Model):
+    restaurant_name = models.TextField()
+    stand_img = models.TextField()
     content = models.TextField()
     author_name = models.CharField(max_length=15)
     rating = models.IntegerField()

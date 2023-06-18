@@ -179,84 +179,26 @@
         <div class="swiper review-slider">
 
             <div class="swiper-wrapper">
-
+                {% if review_list %}
+                {% for review in review_list %}
                 <div class="swiper-slide slide">
                     <i class="fas fa-quote-right"></i>
                     <div class="user">
-                        <img src="{% static './images/review1.png' %}" alt="">
+                        <img src="{{ review.stand_img }}" alt="">
                         <div class="user-info">
-                            <h3>24시 할매국밥</h3>
-                            <h3>오승헌</h3>
+                            <h3>{{ review.restaurant_name }}</h3>
+                            <h3>{{ review.author_name }}</h3>
                             <div class="stars">
+                                {% for i in review.rating_range %}
                                 <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
+                                {% endfor %}
                             </div>
                         </div>
                     </div>
-                    <p>진한 국물이 매력인 순대국집입니다. 다데기가 마음껏 넣을 수 있도록 제공되기 때문에 기호에 맞게 양껏 넣어먹을 수 있어서 좋았어요.</p>
+                    <p>{{ review.content }} </p>
                 </div>
-
-                <div class="swiper-slide slide">
-                    <i class="fas fa-quote-right"></i>
-                    <div class="user">
-                        <img src="{% static './images/dish-4.png' %}" alt="">
-                        <div class="user-info">
-                            <h3>피자마루</h3>
-                            <h3>김미형</h3>
-                            <div class="stars">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-
-                            </div>
-                        </div>
-                    </div>
-                    <p>풍부한 토핑과 두꺼운 도우가 매력인 피자집입니다. 저는 개인적으로 포테이토 피자를 제일 선호합니다!</p>
-                </div>
-
-                <div class="swiper-slide slide">
-                    <i class="fas fa-quote-right"></i>
-                    <div class="user">
-                        <img src="{% static './images/review2.png' %}" alt="">
-                        <div class="user-info">
-                            <h3>빽다방</h3>
-                            <h3>신우진</h3>
-                            <div class="stars">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <p>일 끝나고 즐기는 달콤쌉살한 커피 한잔이 가끔 떠오를 때가 있습니다.. 그럴때면 방문하는 곳입니다.가격 또한 매우 훌륭해서 마음에 드네요. </p>
-                </div>
-
-                <div class="swiper-slide slide">
-                    <i class="fas fa-quote-right"></i>
-                    <div class="user">
-                        <img src="{% static './images/dish-1.png' %}" alt="">
-                        <div class="user-info">
-                            <h3>kfc</h3>
-                            <h3>손의현</h3>
-                            <div class="stars">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-
-                            </div>
-                        </div>
-                    </div>
-                    <p>가볍게 식사를 때울때 방문하는 곳입니다. 맛있습니다.</p>
-                </div>
-
+                {% endfor %}
+                {% endif %}
             </div>
 
             <div class="swiper-pagination"></div>
