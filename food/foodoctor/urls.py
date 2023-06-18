@@ -14,6 +14,7 @@ urlpatterns = [
 
     path('<str:category>/', detail_views.detail, name='detail'),
     path('<str:restaurant_name>/reviews/write', detail_views.add_review, name='add_review'),
+    path('<str:restaurant_name>/reviews/list', detail_views.show_review_list, name='review_list'),
     # 내부 api ( roulette.js 에서 랜덤으로 뽑은 카테고리를 인자로 리퀘스트 -> 카테고리에 맞는 식당중 하나의 정보 반환 )
     path('roulette/roulette_query', queryHandler.roulette_query, name='roulette_query')
 ]

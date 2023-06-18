@@ -36,7 +36,7 @@
                 <div class="content">
                     <h3><center>{{ item.name }}</h3>
                     <center>
-                    <button onclick=""
+                    <button onclick="location.href='{% url 'foodoctor:review_list' restaurant_name=item.name %}'"
                             style="margin-right: 10px; margin-top: 0.5rem;">리뷰 보기</button>
                     <button onclick="location.href='{% url 'foodoctor:add_review' restaurant_name=item.name %}'"
                             style="margin-top: 0.5rem;">리뷰 쓰기</button>

@@ -1,6 +1,6 @@
 # from django.db import models
 from djongo import models
-
+from django import forms
 
 # Create your models here.
 
@@ -41,10 +41,23 @@ class Review(models.Model):
     content = models.TextField()
     author_name = models.CharField(max_length=15)
     rating = models.IntegerField()
-    last_updated = models.DateField(auto_now=True)
+    last_updated = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.content
 
     class Meta:
         abstract = True
+
+
+class ReviewForm(forms.ModelForm):
+    class Meta:
+        model = Review
+        fields = (
+            'content',
+            'author_name',
+            'rating'
+        )
 
 
 class Restaurant(models.Model):
@@ -66,6 +79,7 @@ class Restaurant(models.Model):
     )
     review = models.ArrayField(
         model_container=Review,
+        model_form_class=ReviewForm,
         null=True
     )
     rating = models.DecimalField(max_digits=3, decimal_places=2)
@@ -79,5 +93,6 @@ class Restaurant(models.Model):
 class LatestReviews(models.Model):
     review = models.ArrayField(
         model_container=Review,
+        model_form_class=ReviewForm,
         null=True
     )
