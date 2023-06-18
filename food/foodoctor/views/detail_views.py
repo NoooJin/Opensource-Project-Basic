@@ -1,7 +1,7 @@
 import datetime
 
 import django.conf
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from djongo import models
 from ..models import Restaurant, Review, LatestReviews, ReviewForm
@@ -64,7 +64,7 @@ def add_review(request, restaurant_name: str):
 
             if len(LatestReviews.objects.all()) > 0:
                 print('리뷰가 추가되었습니다')
-                latest_reviews = (LatestReviews.objects.all())[0]
+                latest_reviews = LatestReviews.objects.first()
                 if len(latest_reviews.review) >= 8:
                     latest_reviews.review.pop(0)
                 latest_reviews.review.append(review)
@@ -90,7 +90,7 @@ def add_review(request, restaurant_name: str):
             context = {'restaurant_list': restaurant_list,
                        'category': category_to_title[restaurant.category]
                        }
-            return render(request, 'foodoctor/detail.html', context)
+            return redirect('foodoctor:index')
     else:
         form = ReviewForm()
     context = {'form': form}

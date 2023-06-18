@@ -93,6 +93,7 @@ class Restaurant(models.Model):
 
 
 class LatestReviews(models.Model):
+    _id = models.ObjectIdField()
     review = models.ArrayField(
         model_container=Review,
         model_form_class=ReviewForm,
